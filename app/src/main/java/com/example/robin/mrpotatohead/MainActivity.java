@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     String[] parts = {"nose", "arms", "ears", "eyes", "eyebrows", "glasses", "hat", "mouth", "mustache", "shoes"};
     int[] partsId = new int[]{R.id.nose, R.id.arms, R.id.ears, R.id.eyes, R.id.eyebrows, R.id.glasses, R.id.hat, R.id.mouth, R.id.mustache, R.id.shoes};
     int[] visibility = new int[]{};
-
+    String nose = "nose";
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 //            ImageView image = (ImageView) findViewById(partsId[i]);
 //            outState.putInt(parts[i], image.getVisibility());
 //        }
-        String nose = "nose";
+
         ImageView image = findViewById(R.id.nose);
         outState.putInt(nose, image.getVisibility());
     }
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             //        }
             ImageView image = findViewById(R.id.nose);
             if (image != null) {
-                image.setVisibility(savedInstanceState.getInt(nose));
+                image.setVisibility(savedInstanceState.getInt("nose"));
             }
 
         }

@@ -9,21 +9,34 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
+    public String nose = "nose";
     String[] parts = {"nose", "arms", "ears", "eyes", "eyebrows", "glasses", "hat", "mouth", "mustache", "shoes"};
     int[] partsId = new int[]{R.id.nose, R.id.arms, R.id.ears, R.id.eyes, R.id.eyebrows, R.id.glasses, R.id.hat, R.id.mouth, R.id.mustache, R.id.shoes};
     int[] visibility = new int[]{};
-    String nose = "nose";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        if (savedInstanceState != null) {
+            for (int i = 0; i < parts.length; i++) {
+                ImageView image = findViewById(partsId[i]);
+
+                if (image != null) {
+                    image.setVisibility(savedInstanceState.getInt(parts[i]));
+                }
+            }
+        }
+
+    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-//        for (int i = 0; i < parts.length; i++){
-//            ImageView image = (ImageView) findViewById(partsId[i]);
-//            outState.putInt(parts[i], image.getVisibility());
-//        }
-
-        ImageView image = findViewById(R.id.nose);
-        outState.putInt(nose, image.getVisibility());
+        for (int i = 0; i < parts.length; i++) {
+            ImageView image = findViewById(partsId[i]);
+            outState.putInt(parts[i], image.getVisibility());
+        }
     }
 
 
@@ -46,22 +59,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (savedInstanceState != null) {
-            //    for (int i = 0; i < parts.length; i++) {
-            //        ImageView image = (ImageView) findViewById(partsId[i]);
 
-            //        if (image != null) {
-            //            image.setVisibility(savedInstanceState.getInt(parts[i]));
-            //        }
-            ImageView image = findViewById(R.id.nose);
-            if (image != null) {
-                image.setVisibility(savedInstanceState.getInt("nose"));
-            }
-
-        }
-        setContentView(R.layout.activity_main);
-    }
 }
